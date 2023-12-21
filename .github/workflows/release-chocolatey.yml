@@ -29,10 +29,17 @@ jobs:
           }
           echo "Setting version to $version"
           echo "version=$version" >> $env:GITHUB_OUTPUT
+
+      - name: Get Checksum of the release
+        id: release_checksum
+        run: |
+          $checksum = (Get-FileHash -Path "./dist/asyncapi-cli-${{ steps.release_version.outputs.version }}.exe" -Algorithm SHA256).Hash
+          echo "checksum=$checksum" >> $env:GITHUB_OUTPUT
+
       - name: Make nuspec from the template
         run: |
           cd ./.github/workflows/deploy/chocolatey
-          pwsh -File ./replace.ps1 -version ${{ steps.release_version.outputs.version }}
+          pwsh -File ./replace.ps1 -version ${{ steps.release_version.outputs.version }} -checksum ${{ steps.release_checksum.outputs.checksum }} -checksum64 ${{ steps.release_checksum64.outputs.checksum64 }}
       - name: Run Chocolatey Pack
         run: |
           cd ./.github/workflows/deploy/chocolatey
