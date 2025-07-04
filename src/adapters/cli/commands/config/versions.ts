@@ -1,5 +1,5 @@
-import Command from '../../internal/base';
-import { helpFlag } from '../../internal/flags/global.flags';
+import Command from '@cli/internal/base';
+import { helpFlag } from '@cli/internal/flags/global.flags';
 import { blueBright, gray } from 'picocolors';
 
 export default class Versions extends Command {

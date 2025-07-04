@@ -1,11 +1,11 @@
-import Command from '../../internal/base';
-import { load } from '../../internal/models/SpecificationFile';
-import { formatOutput, parse, ValidateOptions } from '../../internal/parser';
+import Command from '@cli/internal/base';
+import { load } from '@models/SpecificationFile';
+import { formatOutput, parse, ValidateOptions } from '@cli/internal/parser';
 import { cancel, intro, isCancel, select, spinner, text } from '@clack/prompts';
 import { green, inverse } from 'picocolors';
 import { generateModels, Languages, ModelinaArgs } from '@asyncapi/modelina-cli';
-import { modelsFlags } from '../../internal/flags/generate/models.flags';
-import { proxyFlags } from '../../internal/flags/proxy.flags';
+import { modelsFlags } from '@cli/internal/flags/generate/models.flags';
+import { proxyFlags } from '@cli/internal/flags/proxy.flags';
 
 export default class Models extends Command {
   static description = 'Generates typed models';

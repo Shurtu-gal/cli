@@ -4,20 +4,20 @@ import * as diff from '@asyncapi/diff';
 import AsyncAPIDiff from '@asyncapi/diff/lib/asyncapidiff';
 import { promises as fs } from 'fs';
 import chalk from 'chalk';
-import { load, Specification } from '../internal/models/SpecificationFile';
-import Command from '../internal/base';
-import { ValidationError } from '../internal/errors/validation-error';
-import { SpecificationFileNotFound } from '../internal/errors/specification-file';
+import { load, Specification } from '@models/SpecificationFile';
+import Command from '@cli/internal/base';
+import { ValidationError } from '@errors/validation-error';
+import { SpecificationFileNotFound } from '@errors/specification-file';
 import {
   DiffBreakingChangeError,
   DiffOverrideFileError,
   DiffOverrideJSONError,
-} from '../internal/errors/diff-error';
-import { specWatcher } from '../internal/globals';
-import { parse } from '../internal/parser';
+} from '@errors/diff-error';
+import { specWatcher } from '@cli/internal/globals';
+import { parse } from '@cli/internal/parser';
 
-import type { SpecWatcherParams } from '../internal/globals';
-import { diffFlags } from '../internal/flags/diff.flags';
+import type { SpecWatcherParams } from '@cli/internal/globals';
+import { diffFlags } from '@cli/internal/flags/diff.flags';
 
 const { readFile } = fs;
 

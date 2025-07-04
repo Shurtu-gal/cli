@@ -1,15 +1,15 @@
 import { promises as fPromises } from 'fs';
-import Command from '../../internal/base';
+import Command from '@cli/internal/base';
 import path, { resolve, join } from 'path';
 import fs from 'fs-extra';
-import { Specification, load } from '../../internal/models/SpecificationFile';
+import { Specification, load } from '@models/SpecificationFile';
 import yaml from 'js-yaml';
 import { prompt } from 'inquirer';
 // eslint-disable-next-line
 // @ts-ignore
 import Generator from '@asyncapi/generator';
 import { cyan, gray } from 'picocolors';
-import { gleeFlags } from '../../internal/flags/new/glee.flags';
+import { gleeFlags } from '@cli/internal/flags/new/glee.flags';
 
 export const successMessage = (projectName: string) =>
   `🎉 Your Glee project has been successfully created!

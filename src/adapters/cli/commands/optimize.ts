@@ -1,14 +1,14 @@
 import { Args } from '@oclif/core';
 import { Optimizer, Output, Report, ReportElement } from '@asyncapi/optimizer';
-import Command from '../internal/base';
-import { ValidationError } from '../internal/errors/validation-error';
-import { load } from '../internal/models/SpecificationFile';
+import Command from '@cli/internal/base';
+import { ValidationError } from '@errors/validation-error';
+import { load } from '@models/SpecificationFile';
 import * as inquirer from 'inquirer';
 import chalk from 'chalk';
 import { promises } from 'fs';
 import { Parser } from '@asyncapi/parser';
-import { optimizeFlags } from '../internal/flags/optimize.flags';
-import { proxyFlags } from '../internal/flags/proxy.flags';
+import { optimizeFlags } from '@cli/internal/flags/optimize.flags';
+import { proxyFlags } from '@cli/internal/flags/proxy.flags';
 
 const { writeFile } = promises;
 

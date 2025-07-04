@@ -1,11 +1,11 @@
 import { Args } from '@oclif/core';
-import Command from '../internal/base';
-import { validate, ValidateOptions, ValidationStatus, parse } from '../internal/parser';
-import { load } from '../internal/models/SpecificationFile';
-import { specWatcher } from '../internal/globals';
-import { validateFlags } from '../internal/flags/validate.flags';
-import { proxyFlags } from '../internal/flags/proxy.flags';
-import { calculateScore } from '../internal/utils/scoreCalculator';
+import Command from '@cli/internal/base';
+import { validate, ValidateOptions, ValidationStatus, parse } from '@cli/internal/parser';
+import { load } from '@models/SpecificationFile';
+import { specWatcher } from '@cli/internal/globals';
+import { validateFlags } from '@cli/internal/flags/validate.flags';
+import { proxyFlags } from '@cli/internal/flags/proxy.flags';
+import { calculateScore } from '@cli/internal/utils/scoreCalculator';
 
 export default class Validate extends Command {
   static description = 'validate asyncapi file';

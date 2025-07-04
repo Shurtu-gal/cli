@@ -1,12 +1,12 @@
-import Command from '../../../internal/base';
-import { getCurrentContext, CONTEXT_FILE_PATH } from '../../../internal/models/Context';
+import Command from '@cli/internal/base';
+import { getCurrentContext, CONTEXT_FILE_PATH } from '@models/Context';
 import {
   MissingContextFileError,
   ContextFileWrongFormatError,
   ContextFileEmptyError,
   ContextNotFoundError,
-} from '../../../internal/errors/context-error';
-import { helpFlag } from '../../../internal/flags/global.flags';
+} from '@errors/context-error';
+import { helpFlag } from '@cli/internal/flags/global.flags';
 import { blueBright } from 'picocolors';
 
 export default class ContextCurrent extends Command {

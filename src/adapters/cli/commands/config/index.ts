@@ -1,4 +1,4 @@
-import Command from '../../internal/base';
+import Command from '@cli/internal/base';
 import { loadHelpClass } from '@oclif/core';
 
 export default class Config extends Command {

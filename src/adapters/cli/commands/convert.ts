@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { promises as fPromises } from 'fs';
 import { Args } from '@oclif/core';
-import Command from '../internal/base';
-import { ValidationError } from '../internal/errors/validation-error';
-import { load } from '../internal/models/SpecificationFile';
-import { SpecificationFileNotFound } from '../internal/errors/specification-file';
+import Command from '@cli/internal/base';
+import { ValidationError } from '@errors/validation-error';
+import { load } from '@models/SpecificationFile';
+import { SpecificationFileNotFound } from '@errors/specification-file';
 import { convert, convertOpenAPI, convertPostman } from '@asyncapi/converter';
 import type { AsyncAPIConvertVersion, OpenAPIConvertVersion } from '@asyncapi/converter';
 import { cyan, green } from 'picocolors';
-import { proxyFlags } from '../internal/flags/proxy.flags';
+import { proxyFlags } from '@cli/internal/flags/proxy.flags';
 // @ts-ignore
 import specs from '@asyncapi/specs';
-import { convertFlags } from '../internal/flags/convert.flags';
+import { convertFlags } from '@cli/internal/flags/convert.flags';
 
 const latestVersion = Object.keys(specs.schemas).pop() as string;
 

@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { promises as fPromises } from 'fs';
 import { Args } from '@oclif/core';
-import Command from '../internal/base';
+import Command from '@cli/internal/base';
 
 import {
   convertToJSON,
   convertToYaml,
   load,
   retrieveFileFormat,
-} from '../internal/models/SpecificationFile';
-import { SpecificationWrongFileFormat } from '../internal/errors/specification-file';
+} from '@models/SpecificationFile';
+import { SpecificationWrongFileFormat } from '@errors/specification-file';
 import { cyan, green } from 'picocolors';
-import { convertFormatFlags, fileFormat } from '../internal/flags/format.flags';
+import { convertFormatFlags, fileFormat } from '@cli/internal/flags/format.flags';
 
 export default class Convert extends Command {
   static specFile: any;

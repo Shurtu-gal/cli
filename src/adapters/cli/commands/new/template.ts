@@ -1,9 +1,9 @@
 import { promises as fPromises } from 'fs';
-import Command from '../../internal/base';
+import Command from '@cli/internal/base';
 import { resolve, join } from 'path';
-import { load } from '../../internal/models/SpecificationFile';
+import { load } from '@models/SpecificationFile';
 import fs from 'fs-extra';
-import { templateFlags } from '../../internal/flags/new/template.flags';
+import { templateFlags } from '@cli/internal/flags/new/template.flags';
 import { cyan, gray } from 'picocolors';
 import jsonfile from 'jsonfile';
 import path from 'path';

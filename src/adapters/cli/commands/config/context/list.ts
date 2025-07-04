@@ -1,14 +1,14 @@
-import Command from '../../../internal/base';
+import Command from '@cli/internal/base';
 import {
   loadContextFile,
   isContextFileEmpty,
   CONTEXT_FILE_PATH,
-} from '../../../internal/models/Context';
+} from '@models/Context';
 import {
   MissingContextFileError,
   ContextFileWrongFormatError,
-} from '../../../internal/errors/context-error';
-import { helpFlag } from '../../../internal/flags/global.flags';
+} from '@errors/context-error';
+import { helpFlag } from '@cli/internal/flags/global.flags';
 import { blueBright } from 'picocolors';
 
 export default class ContextList extends Command {

@@ -11,7 +11,7 @@ import { red, yellow, green, cyan } from 'chalk';
 
 import type { Diagnostic } from '@asyncapi/parser/cjs';
 import type Command from './base';
-import type { Specification } from './models/SpecificationFile';
+import type { Specification } from '@models/SpecificationFile';
 import { promises } from 'fs';
 import path from 'path';
 

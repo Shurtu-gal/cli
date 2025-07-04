@@ -1,5 +1,5 @@
 import { existsSync, promises as fPromises } from 'fs';
-import { SpecificationFileNotFound } from '../errors/specification-file';
+import { SpecificationFileNotFound } from '@errors/specification-file';
 import { createServer } from 'http';
 import { WebSocketServer } from 'ws';
 import chokidar from 'chokidar';

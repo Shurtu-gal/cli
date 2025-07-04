@@ -1,11 +1,11 @@
 import { Args } from '@oclif/core';
-import Command from '../../../internal/base';
-import { addContext, setCurrentContext } from '../../../internal/models/Context';
+import Command from '@cli/internal/base';
+import { addContext, setCurrentContext } from '@models/Context';
 import {
   MissingContextFileError,
   ContextFileWrongFormatError,
-} from '../../../internal/errors/context-error';
-import { addFlags } from '../../../internal/flags/config/context.flags';
+} from '@errors/context-error';
+import { addFlags } from '@cli/internal/flags/config/context.flags';
 import { blueBright } from 'picocolors';
 
 export default class ContextAdd extends Command {

@@ -1,4 +1,4 @@
-import { SpecificationFileNotFound } from '../errors/specification-file';
+import { SpecificationFileNotFound } from '@errors/specification-file';
 import { existsSync,readFileSync } from 'fs';
 import bundle from '@asyncapi/bundler';
 import { createServer } from 'http';

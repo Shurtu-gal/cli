@@ -1,8 +1,8 @@
 import { Args } from '@oclif/core';
-import Command from '../../internal/base';
-import { previewFlags } from '../../internal/flags/start/preview.flags';
-import { load } from '../../internal/models/SpecificationFile';
-import { startPreview } from '../../internal/models/Preview';
+import Command from '@cli/internal/base';
+import { previewFlags } from '@cli/internal/flags/start/preview.flags';
+import { load } from '@models/SpecificationFile';
+import { startPreview } from '@models/Preview';
 
 export default class PreviewStudio extends Command {
   static readonly description = 'starts a new local instance of Studio in minimal state bundling all the refs of the schema file and with no editing allowed.';

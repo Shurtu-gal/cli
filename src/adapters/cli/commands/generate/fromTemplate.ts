@@ -1,5 +1,5 @@
 import { Args } from '@oclif/core';
-import Command from '../../internal/base';
+import Command from '@cli/internal/base';
 // eslint-disable-next-line
 // @ts-ignore
 import AsyncAPIGenerator from '@asyncapi/generator';
@@ -7,15 +7,15 @@ import AsyncAPINewGenerator from 'generator-v2';
 import path from 'path';
 import os from 'os';
 import fs from 'fs';
-import { load, Specification } from '../../internal/models/SpecificationFile';
-import { isLocalTemplate, Watcher } from '../../internal/utils/generator';
-import { ValidationError } from '../../internal/errors/validation-error';
-import { GeneratorError } from '../../internal/errors/generator-error';
+import { load, Specification } from '@models/SpecificationFile';
+import { isLocalTemplate, Watcher } from '@cli/internal/utils/generator';
+import { ValidationError } from '@errors/validation-error';
+import { GeneratorError } from '@errors/generator-error';
 import { Parser } from '@asyncapi/parser';
 import { intro, isCancel, spinner, text } from '@clack/prompts';
 import { inverse, yellow, magenta, green, red } from 'picocolors';
-import { fromTemplateFlags } from '../../internal/flags/generate/fromTemplate.flags';
-import { proxyFlags } from '../../internal/flags/proxy.flags';
+import { fromTemplateFlags } from '@cli/internal/flags/generate/fromTemplate.flags';
+import { proxyFlags } from '@cli/internal/flags/proxy.flags';
 
 interface IMapBaseUrlToFlag {
   url: string,

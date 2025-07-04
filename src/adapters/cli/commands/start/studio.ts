@@ -1,7 +1,7 @@
-import Command from '../../internal/base';
-import { start as startStudio } from '../../internal/models/Studio';
-import { load } from '../../internal/models/SpecificationFile';
-import { studioFlags } from '../../internal/flags/start/studio.flags';
+import Command from '@cli/internal/base';
+import { start as startStudio } from '@models/Studio';
+import { load } from '@models/SpecificationFile';
+import { studioFlags } from '@cli/internal/flags/start/studio.flags';
 import { Args } from '@oclif/core';
 import { isCancel, text, cancel } from '@clack/prompts';
 

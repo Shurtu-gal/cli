@@ -1,11 +1,11 @@
 import { promises as fPromises, readFileSync } from 'fs';
-import Command from '../../internal/base';
+import Command from '@cli/internal/base';
 import * as inquirer from 'inquirer';
-import { start as startStudio, DEFAULT_PORT } from '../../internal/models/Studio';
+import { start as startStudio, DEFAULT_PORT } from '@models/Studio';
 import { resolve } from 'path';
-import { load } from '../../internal/models/SpecificationFile';
+import { load } from '@models/SpecificationFile';
 import { cyan } from 'picocolors';
-import { fileFlags } from '../../internal/flags/new/file.flags';
+import { fileFlags } from '@cli/internal/flags/new/file.flags';
 
 const { writeFile, readFile } = fPromises;
 const DEFAULT_ASYNCAPI_FILE_NAME = 'asyncapi.yaml';

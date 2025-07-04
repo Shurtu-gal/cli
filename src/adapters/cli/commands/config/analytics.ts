@@ -1,8 +1,8 @@
 import { join, resolve } from 'path';
-import Command from '../../internal/base';
+import Command from '@cli/internal/base';
 import { promises as fPromises } from 'fs';
 import { homedir } from 'os';
-import { analyticsFlags } from '../../internal/flags/config/analytics.flags';
+import { analyticsFlags } from '@cli/internal/flags/config/analytics.flags';
 import { blueBright, redBright } from 'picocolors';
 
 const { readFile, writeFile } = fPromises;

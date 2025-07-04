@@ -1,7 +1,7 @@
 import { Args } from '@oclif/core';
-import Command from '../../../internal/base';
-import { initContext } from '../../../internal/models/Context';
-import { helpFlag } from '../../../internal/flags/global.flags';
+import Command from '@cli/internal/base';
+import { initContext } from '@models/Context';
+import { helpFlag } from '@cli/internal/flags/global.flags';
 import { blueBright } from 'picocolors';
 export default class ContextInit extends Command {
   static description = 'Initialize context';

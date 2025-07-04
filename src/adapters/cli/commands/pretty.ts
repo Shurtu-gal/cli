@@ -1,10 +1,10 @@
 import { Args } from '@oclif/core';
 import { promises as fs } from 'fs';
 import * as yaml from 'yaml';
-import Command from '../internal/base';
-import { load , retrieveFileFormat} from '../internal/models/SpecificationFile';
-import { ValidationError } from '../internal/errors/validation-error';
-import { prettyFlags } from '../internal/flags/pretty.flags';
+import Command from '@cli/internal/base';
+import { load , retrieveFileFormat} from '@models/SpecificationFile';
+import { ValidationError } from '@errors/validation-error';
+import { prettyFlags } from '@cli/internal/flags/pretty.flags';
 
 export default class Pretty extends Command {
   static readonly description = 'Beautify the AsyncAPI spec file (indentation, styling) in place or output the formatted spec to a new file.';
