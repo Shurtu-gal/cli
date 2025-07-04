@@ -93,14 +93,14 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "oclif": {
-    "commands": "./lib/commands",
+    "commands": "./lib/adapters/cli/commands",
     "bin": "asyncapi",
     "additionalVersionFlags": [
       "--v"
     ],
     "hooks": {
       "command_not_found": [
-        "./lib/core/hooks/command_not_found/myhook"
+        "./lib/adapters/cli/core/hooks/command_not_found/myhook"
       ]
     },
     "macos": {
