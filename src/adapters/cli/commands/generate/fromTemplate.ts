@@ -8,7 +8,7 @@ import path from 'path';
 import os from 'os';
 import fs from 'fs';
 import { load, Specification } from '@models/SpecificationFile';
-import { isLocalTemplate, Watcher } from '@cli/internal/utils/generator';
+import { isLocalTemplate, Watcher } from '@/utils/fileWatcher';
 import { ValidationError } from '@errors/validation-error';
 import { GeneratorError } from '@errors/generator-error';
 import { Parser } from '@asyncapi/parser';

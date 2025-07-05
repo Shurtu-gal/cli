@@ -5,7 +5,7 @@ import { load } from '@models/SpecificationFile';
 import { specWatcher } from '@cli/internal/globals';
 import { validateFlags } from '@cli/internal/flags/validate.flags';
 import { proxyFlags } from '@cli/internal/flags/proxy.flags';
-import { calculateScore } from '@cli/internal/utils/scoreCalculator';
+import { calculateScore } from '@utils/scoreCalculator';
 
 export default class Validate extends Command {
   static description = 'validate asyncapi file';
