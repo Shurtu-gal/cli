@@ -1,6 +1,6 @@
 import { Flags } from '@oclif/core';
-import { validationFlags } from '../parser';
 import { watchFlag } from './global.flags';
+import { parserFlags } from './parser.flags';
 
 export const diffFlags = () => {
   return {
@@ -30,6 +30,6 @@ export const diffFlags = () => {
       description: 'don\'t show error on breaking changes',
     }),
     watch: watchFlag(),
-    ...validationFlags({ logDiagnostics: false }),
+    ...parserFlags({ logDiagnostics: false }),
   };
 };

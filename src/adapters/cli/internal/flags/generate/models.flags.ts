@@ -1,6 +1,6 @@
 import { Flags } from '@oclif/core';
-import { validationFlags } from '../../parser';
 import { ModelinaFlags } from '@asyncapi/modelina-cli';
+import { parserFlags } from '../parser.flags';
 
 export const modelsFlags = (): Record<string, any> => {
   return {
@@ -10,6 +10,6 @@ export const modelsFlags = (): Record<string, any> => {
       required: false,
       default: false,
     }),
-    ...validationFlags({ logDiagnostics: false }),
+    ...parserFlags({ logDiagnostics: false }),
   };
 };
