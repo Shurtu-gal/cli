@@ -1,5 +1,5 @@
 import { BaseService } from './base.service';
-import { ValidationOptions, ValidationResult, ServiceResult, ParsedDocument } from '@/interfaces';
+import { ValidationOptions, ValidationResult, ServiceResult, ParsedDocument, DiagnosticsFormat, SeverityKind } from '@/interfaces';
 import { AvroSchemaParser } from '@asyncapi/avro-schema-parser';
 import { OpenAPISchemaParser } from '@asyncapi/openapi-schema-parser';
 import { DiagnosticSeverity, Parser } from '@asyncapi/parser/cjs';
@@ -12,6 +12,8 @@ import { promises } from 'fs';
 import path from 'path';
 
 import type { Diagnostic } from '@asyncapi/parser/cjs';
+import { Specification } from '@models/SpecificationFile';
+import { ParseOptions } from '@asyncapi/parser';
 
 const { writeFile } = promises;
 
@@ -19,9 +21,6 @@ export enum ValidationStatus {
   INVALID = 'invalid',
   VALID = 'valid',
 }
-
-type DiagnosticsFormat = 'stylish' | 'json' | 'junit' | 'html' | 'text' | 'teamcity' | 'pretty';
-type SeverityKind = 'error' | 'warn' | 'info' | 'hint';
 
 const formatExtensions: Record<DiagnosticsFormat, string> = {
   stylish: '.txt',
@@ -47,19 +46,13 @@ export class ValidationService extends BaseService {
         }
       },
     });
-
-    // Register schema parsers
-    this.parser.registerSchemaParser(AvroSchemaParser());
-    this.parser.registerSchemaParser(OpenAPISchemaParser());
-    this.parser.registerSchemaParser(RamlDTSchemaParser());
-    this.parser.registerSchemaParser(ProtoBuffSchemaParser());
   }
 
   /**
    * Validates an AsyncAPI document
    */
   async validateDocument(
-    specFile: any,
+    specFile: Specification,
     options: ValidationOptions = {}
   ): Promise<ServiceResult<ValidationResult>> {
     try {
@@ -134,11 +127,16 @@ export class ValidationService extends BaseService {
   /**
    * Parses an AsyncAPI document and returns the parsed result
    */
-  async parseDocument(specFile: any, options: ValidationOptions = {}): Promise<ServiceResult<ParsedDocument>> {
+  async parseDocument(specFile: Specification, parseOptions: ParseOptions, options: ValidationOptions = {}): Promise<ServiceResult<ParsedDocument>> {
     try {
       const { document, diagnostics } = await this.parser.parse(specFile.text(), { 
-        source: specFile.getSource() 
+        source: specFile.getSource(),
+        ...parseOptions,
       });
+
+      if (!document) {
+        return this.createErrorResult('Failed to parse document');
+      }
       
       const status = this.determineDiagnosticsStatus(diagnostics, options);
       

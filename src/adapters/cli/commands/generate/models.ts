@@ -1,11 +1,12 @@
 import Command from '@cli/internal/base';
 import { load } from '@models/SpecificationFile';
-import { formatOutput, parse, ValidateOptions } from '@cli/internal/parser';
+import { formatOutput, parse } from '@cli/internal/parser';
 import { cancel, intro, isCancel, select, spinner, text } from '@clack/prompts';
 import { green, inverse } from 'picocolors';
 import { generateModels, Languages, ModelinaArgs } from '@asyncapi/modelina-cli';
 import { modelsFlags } from '@cli/internal/flags/generate/models.flags';
 import { proxyFlags } from '@cli/internal/flags/proxy.flags';
+import { ValidationOptions } from '@/interfaces';
 
 export default class Models extends Command {
   static description = 'Generates typed models';
@@ -40,7 +41,7 @@ export default class Models extends Command {
     }
     const inputFile = (await load(file)) || (await load());
 
-    const { document, diagnostics ,status } = await parse(this, inputFile, flags as ValidateOptions);
+    const { document, diagnostics ,status } = await parse(this, inputFile, flags as ValidationOptions);
 
     if (!document || status === 'invalid') {
       const severityErrors = diagnostics.filter((obj) => obj.severity === 0);

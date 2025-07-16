@@ -1,14 +1,18 @@
-import { registerSchemaParser, parse, ParserError } from '@asyncapi/parser';
+import { Parser } from '@asyncapi/parser';
 import { Request } from 'express';
-import ramlDtParser from '@asyncapi/raml-dt-schema-parser';
-import openapiSchemaParser from '@asyncapi/openapi-schema-parser';
-import avroSchemaParser from '@asyncapi/avro-schema-parser';
+import { AvroSchemaParser } from '@asyncapi/avro-schema-parser';
+import { OpenAPISchemaParser } from '@asyncapi/openapi-schema-parser';
+import { RamlDTSchemaParser } from '@asyncapi/raml-dt-schema-parser';
+import { ProtoBuffSchemaParser } from '@asyncapi/protobuf-schema-parser';
 
-import { ProblemException } from '../adapters/api/exceptions/problem.exception';
+import { ProblemException } from '../../adapters/api/exceptions/problem.exception';
 
-registerSchemaParser(openapiSchemaParser);
-registerSchemaParser(ramlDtParser);
-registerSchemaParser(avroSchemaParser);
+const parser = new Parser();
+
+parser.registerSchemaParser(OpenAPISchemaParser());
+parser.registerSchemaParser(RamlDTSchemaParser());
+parser.registerSchemaParser(AvroSchemaParser());
+parser.registerSchemaParser(ProtoBuffSchemaParser());
 
 function prepareParserConfig(req?: Request) {
   if (!req) {
@@ -93,6 +97,8 @@ function tryConvertToProblemException(err: any) {
 
   return error;
 }
+
+const parse = parser.parse;
 
 export {
   prepareParserConfig,

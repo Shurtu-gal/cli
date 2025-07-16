@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import { AsyncAPIDocument } from '@asyncapi/parser';
 
 import { ProblemException } from '../exceptions/problem.exception';
 import { createAjvInstance } from '../../../utils/ajv';
@@ -8,7 +7,7 @@ import {
   parse,
   prepareParserConfig,
   tryConvertToProblemException,
-} from '../../../utils/parser';
+} from '../../../domains/services/parser';
 
 import type { ValidateFunction } from 'ajv';
 
@@ -53,17 +52,21 @@ async function compileAjv(options: ValidationMiddlewareOptions) {
   }
 
   const requestBody = method.requestBody;
-  if (!requestBody) return;
+  if (!requestBody) {
+    return;
+  }
 
   let schema = requestBody.content['application/json'].schema;
-  if (!schema) return;
+  if (!schema) {
+    return;
+  }
 
   schema = { ...schema };
   schema['$schema'] = 'http://json-schema.org/draft-07/schema';
 
   if (options.documents && schema.properties) {
     schema.properties = { ...schema.properties };
-    options.documents.forEach((field) => {
+    for (const field of options.documents) {
       if (schema.properties[String(field)].items) {
         schema.properties[String(field)] = {
           ...schema.properties[String(field)],
@@ -72,7 +75,7 @@ async function compileAjv(options: ValidationMiddlewareOptions) {
       } else {
         schema.properties[String(field)] = true;
       }
-    });
+    }
   }
 
   return ajvInstance.compile(schema);
@@ -127,6 +130,15 @@ export async function validationMiddleware(
   return async function (req: Request, _: Response, next: NextFunction) {
     // validate request body
     try {
+      if (!validate) {
+        throw new ProblemException({
+          type: 'invalid-request-body',
+          title: 'Invalid Request Body',
+          status: 422,
+          detail: `Request body validation is not supported for "${options.path}" path with "${options.method}" method.`,
+        });
+      }
+
       await validateRequestBody(validate, req.body);
     } catch (err: unknown) {
       return next(err);
@@ -136,6 +148,10 @@ export async function validationMiddleware(
     const parserConfig = prepareParserConfig(req);
     try {
       req.asyncapi = req.asyncapi || {};
+      if (!documents || documents.length === 0) {
+        return next();
+      }
+
       for (const field of documents) {
         const body = req.body[String(field)];
         if (Array.isArray(body)) {

@@ -14,10 +14,7 @@ import type Command from './base';
 import type { Specification } from '@models/SpecificationFile';
 import { promises } from 'fs';
 import path from 'path';
-
-type DiagnosticsFormat = 'stylish' | 'json' | 'junit' | 'html' | 'text' | 'teamcity' | 'pretty';
-
-export type SeverityKind = 'error' | 'warn' | 'info' | 'hint';
+import { DiagnosticsFormat, ValidationOptions, SeverityKind } from '@/interfaces';
 
 export { convertToOldAPI };
 
@@ -58,43 +55,10 @@ export enum ValidationStatus {
   VALID = 'valid',
 }
 
-export function validationFlags({ logDiagnostics = true }: ValidationFlagsOptions = {}) {
-  return {
-    'log-diagnostics': Flags.boolean({
-      description: 'log validation diagnostics or not',
-      default: logDiagnostics,
-      allowNo: true,
-    }),
-    'diagnostics-format': Flags.option({
-      description: 'format to use for validation diagnostics',
-      options: Object.values(OutputFormat),
-      default: OutputFormat.STYLISH,
-    })(),
-    'fail-severity': Flags.option({
-      description: 'diagnostics of this level or above will trigger a failure exit code',
-      options: ['error', 'warn', 'info', 'hint'] as const,
-      default: 'error',
-    })(),
-    output: Flags.string({
-      description: 'The output file name. Omitting this flag the result will be printed in the console.',
-      char: 'o' 
-    })
-  };
-}
-
-export interface ValidateOptions {
-  'log-diagnostics'?: boolean;
-  'diagnostics-format'?: `${OutputFormat}`;
-  'fail-severity'?: SeverityKind;
-  'output'?: string;
-  suppressWarnings?: string[];
-  suppressAllWarnings?: boolean;
-}
-
 export async function validate(
   command: Command,
   specFile: Specification,
-  options: ValidateOptions = {}
+  options: ValidationOptions = {}
 ) {
   const suppressAllWarnings = options.suppressAllWarnings ?? false;
   const suppressedWarnings = options.suppressWarnings ?? [];
@@ -157,7 +121,7 @@ export async function validate(
   return logDiagnostics(diagnostics, command, specFile, options);
 }
 
-export async function parse(command: Command, specFile: Specification, options: ValidateOptions = {}) {
+export async function parse(command: Command, specFile: Specification, options: ValidationOptions = {}) {
   const { document, diagnostics } = await parser.parse(specFile.text(), { source: specFile.getSource() });
   const status = logDiagnostics(diagnostics, command, specFile, options);
   return { document, diagnostics, status };
@@ -167,7 +131,7 @@ function logDiagnostics(
   diagnostics: Diagnostic[],
   command: Command,
   specFile: Specification,
-  options: ValidateOptions = {}
+  options: ValidationOptions = {}
 ): 'valid' | 'invalid' {
   const logDiagnostics = options['log-diagnostics'];
   const failSeverity = options['fail-severity'] ?? 'error';
@@ -205,7 +169,7 @@ function outputDiagnostics(
   diagnostics: Diagnostic[],
   diagnosticsFormat: DiagnosticsFormat,
   failSeverity: SeverityKind,
-  options: ValidateOptions
+  options: ValidationOptions
 ) {
   const diagnosticsOutput = formatOutput(diagnostics, diagnosticsFormat, failSeverity);
   if (options.output) {
