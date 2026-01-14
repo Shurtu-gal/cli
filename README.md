@@ -1,4 +1,5 @@
 [![AsyncAPI CLI](./assets/logo.png)](https://www.asyncapi.com/tools/cli)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FShurtu-gal%2Fcli.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FShurtu-gal%2Fcli?ref=badge_shield)
 
 CLI to work with your AsyncAPI files. Currently under development, we are working to bring more features. 
 
@@ -119,3 +120,7 @@ Thanks go to these wonderful people ([emoji key](https://allcontributors.org/doc
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FShurtu-gal%2Fcli.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FShurtu-gal%2Fcli?ref=badge_large)
